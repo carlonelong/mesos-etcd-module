@@ -22,7 +22,7 @@
 #include <stout/option.hpp>
 #include <stout/strings.hpp>
 
-#include <mesos/etcd/url.hpp>
+#include "url.hpp"
 
 using std::string;
 using std::vector;
@@ -34,11 +34,10 @@ Try<etcd::URL> etcd::URL::parse(string url)
 
   // Check and remove etcd:// scheme.
   if (!strings::startsWith(url, etcd::URL::scheme())) {
-    return Error("Expecting '" + etcd::URL::scheme() +
-                 "' at the beginning of the URL");
+    return Error("Expecting 'etcd://' at the beginning of the URL");
   }
 
-  url = url.substr(etcd::URL::scheme().size());
+  url = url.substr(7);
 
   // Look for the trailing first '/' after the scheme which marks the
   // start of the path.

@@ -17,7 +17,7 @@
 #include <mesos/mesos.hpp>
 
 #include <mesos/master/contender.hpp>
-#include <mesos/etcd/client.hpp>
+// #include <mesos/etcd/client.hpp>
 
 #include <process/defer.hpp>
 #include <process/future.hpp>

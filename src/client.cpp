@@ -32,7 +32,7 @@
 #include <stout/stringify.hpp>
 #include <stout/try.hpp>
 
-#include <mesos/etcd/client.hpp>
+#include "client.hpp"
 
 using namespace process;
 
@@ -202,7 +202,7 @@ Try<Response> Response::parse(const Try<JSON::Object>& object)
       return Error("Failed to parse 'node' in JSON: " + parse.error());
     }
     Node* n = parse.get();
-    n->previous.reset(previous);
+    // n->previous.reset(previous);
     response.node = *n;
   }
 
@@ -440,9 +440,9 @@ Future<Option<Node>> EtcdClientProcess::__get(const Response& response)
   else if (response.node.isNone()) {
     return Failure("Expecting 'node' in response");
   }
-  else if (response.node.get().previous.get()) {
-    return Failure("Not expecting 'prevNode' in response");
-  }
+  // else if (response.node.get().previous.get()) {
+  //   return Failure("Not expecting 'prevNode' in response");
+  // }
 
   return response.node.get();
 }
